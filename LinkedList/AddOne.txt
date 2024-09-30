@@ -1,0 +1,34 @@
+class Solution {
+    public Node addOne(Node head) {
+        int carry = solve(head);
+        if(carry == 1) {
+            return addNewNodeAtHead(head);
+        } else {
+            return head;
+        }
+    }
+    public int solve(Node head) {
+        if(head.next == null) {
+           return addOneToData(head); 
+        }
+        if(solve(head.next) == 1) {
+            return addOneToData(head);
+        } else {
+            return 0;
+        }
+    }
+    public int addOneToData(Node head) {
+        if(head.data >= 0 && head.data <=8) {
+            head.data = head.data + 1;
+            return 0;
+        } else {
+            head.data = 0;
+            return 1;
+        }
+    }
+    public Node addNewNodeAtHead(Node head) {
+        Node newNode = new Node(1);
+        newNode.next = head;
+        return newNode;
+    }
+}
